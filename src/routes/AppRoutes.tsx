@@ -16,6 +16,7 @@ import VendorRegistrationPage from '@/features/vendors/pages/VendorRegistrationP
 import PenaltiesPage from '@/features/penalties/pages/PenaltiesPage';
 import CompliancePage from '@/features/compliance/pages/CompliancePage';
 import { InspectionsPage } from '../features/inspections/pages/InspectionsPage';
+import ViolationAnalyticsPage from '@/features/analytics/pages/ViolationAnalyticsPage';
 
 const ADMIN_ENFORCER_ROLES: UserRole[] = ['Admin', 'Enforcer'];
 const ADMIN_ONLY_ROLES: UserRole[] = ['Admin'];
@@ -51,7 +52,7 @@ const AppRoutes = () => {
      <Route path={ROUTES.dashboard} element={<DashboardPage />} />
     <Route path={ROUTES.tickets} element={<TicketsPage />} />
     <Route path={ROUTES.ticketDetail(':id')} element={<TicketDetailPage />} />
-        <Route path={ROUTES.analytics} element={<AdminPlaceholderPage title="Analytics" />} />
+        <Route path={ROUTES.analytics} element={<ViolationAnalyticsPage />} />
         <Route path={ROUTES.inspections} element={<InspectionsPage />} />
         <Route path={ROUTES.performance} element={<AdminPlaceholderPage title="Performance" />} />
       </Route>

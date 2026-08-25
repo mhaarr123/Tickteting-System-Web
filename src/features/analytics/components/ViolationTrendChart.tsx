@@ -1,0 +1,8 @@
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
+import Card from '@/components/ui/Card';
+import useViolationTrend from '../hooks/useViolationTrend';
+import type { AnalyticsDateRange } from '@/api/types/analytics.types';
+import styles from '../pages/ViolationAnalyticsPage.module.css';
+const ViolationTrendChart = ({ range }: { range: AnalyticsDateRange }) => { const query = useViolationTrend(range); return <Card className={styles.chartCard}><h3>Violation Trend Over Time</h3><p className={styles.cardSubtitle}>Monthly ticket volume by infraction severity</p><ChartState query={query}>{query.data && <ResponsiveContainer width="100%" height={230}><LineChart data={query.data}><CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" /><XAxis dataKey="period" /><YAxis allowDecimals={false} /><Tooltip /><Legend /><Line dataKey="high" name="High Severity" stroke="#e5484d" strokeWidth={2} /><Line dataKey="medium" name="Medium Severity" stroke="#d97706" strokeWidth={2} /><Line dataKey="low" name="Low Severity" stroke="#16803c" strokeWidth={2} /></LineChart></ResponsiveContainer>}</ChartState></Card>; };
+const ChartState = ({ query, children }: { query: { isLoading: boolean; isError: boolean; data?: unknown[] }; children: React.ReactNode }) => query.isLoading ? <div className={styles.loading}>Loading analytics...</div> : query.isError ? <div className={styles.empty}>Unable to load analytics.</div> : query.data?.length ? <>{children}</> : <div className={styles.empty}>No data for this date range.</div>;
+export default ViolationTrendChart;
